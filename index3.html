@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive JS Tasks</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      margin-top: 40px;
+      color: #1a202c;
+    }
+    section {
+      background: #ffffff;
+      width: 90%;
+      max-width: 600px;
+      padding: 25px;
+      margin: 20px 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    button {
+      padding: 10px 18px;
+      margin-top: 10px;
+      border: none;
+      background: #4a90e2;
+      color: white;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #357ab8;
+    }
+    input {
+      padding: 10px;
+      margin-right: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 60%;
+      font-size: 16px;
+    }
+    .box-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background: #d1d5db;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.3s;
+    }
+    .box:hover {
+      transform: scale(1.05);
+    }
+    #message, #greeting {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #2d3748;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Interactive JavaScript Tasks</h1>
+
+  <section>
+    <h2>1. Show a Motivational Message</h2>
+    <p>Click the button below to see a motivational quote:</p>
+    <button id="showBtn">Show Motivation</button>
+    <p id="message"></p>
+  </section>
+
+  <section>
+    <h2>2. Greet by Name</h2>
+    <p>Enter your name and click Greet to receive a personalized message:</p>
+    <input type="text" id="nameInput" placeholder="Your name here">
+    <button id="greetBtn">Greet Me</button>
+    <p id="greeting"></p>
+  </section>
+
+  <section>
+    <h2>3. Colorful Boxes</h2>
+    <p>Click on any box to change its color:</p>
+    <div class="box-container">
+      <div class="box" id="box1">Box 1</div>
+      <div class="box" id="box2">Box 2</div>
+      <div class="box" id="box3">Box 3</div>
+    </div>
+  </section>
+
+  <script>
+    const motivationMessages = [
+      "Believe in yourself and all that you are!",
+      "Every day is a second chance.",
+      "Push yourself, because no one else is going to do it for you.",
+      "Success is not for the lazy.",
+      "Dream it. Wish it. Do it."
+    ];
+
+    let colors = ["#f56565","#48bb78","#4299e1"];
+
+    const showBtn = document.querySelector("#showBtn");
+    const messagePara = document.querySelector("#message");
+    const nameInput = document.querySelector("#nameInput");
+    const greetBtn = document.querySelector("#greetBtn");
+    const greetingPara = document.querySelector("#greeting");
+    const boxes = document.querySelectorAll(".box");
+
+    showBtn.addEventListener("click", function() {
+      let randomIndex = Math.floor(Math.random() * motivationMessages.length);
+      messagePara.textContent = motivationMessages[randomIndex];
+      messagePara.style.color = "#4a90e2";
+    });
+
+    greetBtn.addEventListener("click", function() {
+      let userName = nameInput.value.trim();
+      if(userName !== "") {
+        greetingPara.textContent = `Hello ${userName}, nice to see you! 👋`;
+        greetingPara.style.color = "#38a169";
+      } else {
+        greetingPara.textContent = "Please enter a valid name.";
+        greetingPara.style.color = "#e53e3e";
+      }
+    });
+
+    boxes.forEach((box, index) => {
+      box.addEventListener("click", function() {
+        box.style.background = colors[index];
+      });
+    });
+  </script>
+
+</body>
+</html>
